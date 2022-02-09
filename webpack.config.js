@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-01-20 19:43:13
- * @LastEditTime: 2022-02-07 18:35:17
+ * @LastEditTime: 2022-02-09 14:08:28
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \webpack-learn\webpack.config.js
@@ -11,14 +11,27 @@ const webpack = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    // mode: "development",
-    mode: "production",
+    mode: "development",
+    // mode: "production",
+    performance: {
+        maxEntrypointSize: 400000,
+        maxAssetSize: 300000
+    },
     entry: {
         index: './src/index.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js',
+    },
+    devServer: {
+        port: 3000,
+        client: {
+            overlay: {
+              errors: true,
+              warnings: false,
+            },
+        },
     },
     plugins: [
         // new webpack.DefinePlugin({
